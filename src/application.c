@@ -13,7 +13,6 @@ twr_button_t button;
 // Thermometer instance
 twr_tmp112_t tmp112;
 uint16_t button_click_count = 0;
-twr_tick_t tick_temperature_report = 0;
 
 // Button event callback
 void button_event_handler(twr_button_t *self, twr_button_event_t event, void *event_param)
@@ -43,12 +42,7 @@ void tmp112_event_handler(twr_tmp112_t *self, twr_tmp112_event_t event, void *ev
 
         twr_log_debug("APP: temperature: %.2f °C", celsius);
 
-        // Publish temperature message on radio every 30s
-        if (tick_temperature_report < twr_tick_get())
-        {
-            twr_radio_pub_temperature(TWR_RADIO_PUB_CHANNEL_R1_I2C0_ADDRESS_ALTERNATE, &celsius);
-            tick_temperature_report = twr_tick_get() + 30000; // in ms
-        }
+        twr_radio_pub_temperature(TWR_RADIO_PUB_CHANNEL_R1_I2C0_ADDRESS_ALTERNATE, &celsius);
     }
 }
 
@@ -69,7 +63,7 @@ void application_init(void)
     // Initialize thermometer on core module
     twr_tmp112_init(&tmp112, TWR_I2C_I2C0, 0x49);
     twr_tmp112_set_event_handler(&tmp112, tmp112_event_handler, NULL);
-    twr_tmp112_set_update_interval(&tmp112, 2000);
+    twr_tmp112_set_update_interval(&tmp112, 10000);
 
     // Initialize radio
     twr_radio_init(TWR_RADIO_MODE_NODE_SLEEPING);
