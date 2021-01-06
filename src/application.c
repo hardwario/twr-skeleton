@@ -1,6 +1,8 @@
-#include <application.h>
+// Tower Kit documentation https://tower.hardwario.com/
+// SDK API description https://sdk.hardwario.com/
+// Forum https://forum.hardwario.com/
 
-// Find defailed API description at https://sdk.hardwario.com/
+#include <application.h>
 
 // LED instance
 twr_led_t led;
@@ -8,8 +10,10 @@ twr_led_t led;
 // Button instance
 twr_button_t button;
 
-// Thermomether instance
+// Thermometer instance
 twr_tmp112_t tmp112;
+uint16_t button_click_count = 0;
+twr_tick_t tick_temperature_report = 0;
 
 // Button event callback
 void button_event_handler(twr_button_t *self, twr_button_event_t event, void *event_param)
@@ -18,10 +22,14 @@ void button_event_handler(twr_button_t *self, twr_button_event_t event, void *ev
     twr_log_info("APP: Button event: %i", event);
 
     // Check event source
-    if (event == TWR_BUTTON_EVENT_PRESS)
+    if (event == BC_BUTTON_EVENT_CLICK)
     {
         // Toggle LED pin state
         twr_led_set_mode(&led, TWR_LED_MODE_TOGGLE);
+
+         // Publish message on radio
+        button_click_count++;
+        twr_radio_pub_push_button(&button_click_count);
     }
 }
 
@@ -30,13 +38,17 @@ void tmp112_event_handler(twr_tmp112_t *self, twr_tmp112_event_t event, void *ev
     if (event == TWR_TMP112_EVENT_UPDATE)
     {
         float celsius;
+        // Read temperature
         twr_tmp112_get_temperature_celsius(self, &celsius);
 
         twr_log_debug("APP: temperature: %.2f °C", celsius);
-    }
-    else if (event == TWR_TMP112_EVENT_ERROR)
-    {
-        twr_log_error("APP: TMP112");
+
+        // Publish temperature message on radio every 30s
+        if (tick_temperature_report < twr_tick_get())
+        {
+            twr_radio_pub_temperature(TWR_RADIO_PUB_CHANNEL_R1_I2C0_ADDRESS_ALTERNATE, &celsius);
+            tick_temperature_report = twr_tick_get() + 30000; // in ms
+        }
     }
 }
 
@@ -58,6 +70,11 @@ void application_init(void)
     twr_tmp112_init(&tmp112, TWR_I2C_I2C0, 0x49);
     twr_tmp112_set_event_handler(&tmp112, tmp112_event_handler, NULL);
     twr_tmp112_set_update_interval(&tmp112, 2000);
+
+    // Initialize radio
+    twr_radio_init(TWR_RADIO_MODE_NODE_SLEEPING);
+    // Send radio pairing request
+    twr_radio_pairing_request("skeleton", VERSION);
 }
 
 // Application task function (optional) which is called peridically if scheduled
