@@ -13,7 +13,7 @@ If you want to get more information about Core Module, firmware and how to work 
 
 **https://tower.hardwario.com/en/latest/firmware/basic-overview**
 
-User's application code (business logic) goes into `app/application.c`.
+User's application code (business logic) goes into `src/application.c`.
 The default content works as a *Hello World* example.
 When flashed into Core Module, it toggles LED state with each button press.
 
