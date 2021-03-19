@@ -2,7 +2,7 @@
 
 # Firmware Skeleton for HARDWARIO TOWER Core Module
 
-[![Travis](https://img.shields.io/travis/hardwario/twr-skeleton/master.svg)](https://travis-ci.org/hardwario/twr-skeleton)
+[![Travis](https://travis-ci.org/hardwario/bcf-skeleton.svg?branch=masterg)](https://travis-ci.org/hardwario/twr-skeleton)
 [![Release](https://img.shields.io/github/release/hardwario/twr-skeleton.svg)](https://github.com/hardwario/twr-skeleton/releases)
 [![License](https://img.shields.io/github/license/hardwario/twr-skeleton.svg)](https://github.com/hardwario/twr-skeleton/blob/master/LICENSE)
 [![Twitter](https://img.shields.io/twitter/follow/hardwario_en.svg?style=social&label=Follow)](https://twitter.com/hardwario_en)
