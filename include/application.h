@@ -2,7 +2,7 @@
 #define _APPLICATION_H
 
 #ifndef VERSION
-#define VERSION "null"
+#define VERSION "vdev"
 #endif
 
 #include <twr.h>
