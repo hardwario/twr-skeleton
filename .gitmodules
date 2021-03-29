@@ -1,3 +1,0 @@
-[submodule "lib/twr-sdk"]
-	path = lib/twr-sdk
-	url = https://github.com/hardwario/twr-sdk.git
