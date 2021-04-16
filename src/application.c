@@ -21,7 +21,7 @@ void button_event_handler(twr_button_t *self, twr_button_event_t event, void *ev
     twr_log_info("APP: Button event: %i", event);
 
     // Check event source
-    if (event == BC_BUTTON_EVENT_CLICK)
+    if (event == TWR_BUTTON_EVENT_CLICK)
     {
         // Toggle LED pin state
         twr_led_set_mode(&led, TWR_LED_MODE_TOGGLE);
