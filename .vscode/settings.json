@@ -1,0 +1,6 @@
+{
+    "search.useIgnoreFiles": false,
+    "search.exclude": {
+        "**/.pio/build": true
+    }
+}
