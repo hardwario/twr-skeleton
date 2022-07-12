@@ -2,5 +2,19 @@
     "search.useIgnoreFiles": false,
     "search.exclude": {
         "**/.pio/build": true
-    }
+    },
+    "C_Cpp.default.includePath": [
+        "${workspaceFolder}/app/**",
+        "${workspaceFolder}/src/**",
+        "${workspaceFolder}/sdk/bcl/inc",
+        "${workspaceFolder}/sdk/bcl/stm/inc",
+        "${workspaceFolder}/sdk/sys/inc",
+        "${workspaceFolder}/sdk/stm/spirit1/inc",
+        "${workspaceFolder}/sdk/stm/hal/inc",
+        "${workspaceFolder}/sdk/stm/usb/inc",
+        "${workspaceFolder}/sdk/twr/**",
+        "${workspaceFolder}/sdk/lib/**",
+        "${default}"
+    ],
+    "C_Cpp.default.cStandard": "c11"
 }
