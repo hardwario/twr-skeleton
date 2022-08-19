@@ -68,7 +68,7 @@ void application_init(void)
     // Initialize radio
     twr_radio_init(TWR_RADIO_MODE_NODE_SLEEPING);
     // Send radio pairing request
-    twr_radio_pairing_request("skeleton", VERSION);
+    twr_radio_pairing_request("skeleton", FW_VERSION);
 }
 
 // Application task function (optional) which is called peridically if scheduled
