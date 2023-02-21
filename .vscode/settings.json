@@ -16,5 +16,15 @@
         "${workspaceFolder}/sdk/lib/**",
         "${default}"
     ],
-    "C_Cpp.default.cStandard": "c11"
+    "C_Cpp.default.cStandard": "c11",
+    "C_Cpp.default.browse.path": [
+        "${workspaceFolder}/app",
+        "${workspaceFolder}/src",
+        "${workspaceFolder}/sdk/bcl",
+        "${workspaceFolder}/sdk/twr",
+        "${workspaceFolder}/sdk/lib",
+        "${workspaceFolder}/sdk/sys",
+        "${workspaceFolder}/sdk/stm",
+        "${default}"
+    ]
 }
