@@ -26,5 +26,6 @@
         "${workspaceFolder}/sdk/sys",
         "${workspaceFolder}/sdk/stm",
         "${default}"
-    ]
+    ],
+    "terminal.integrated.shell.windows": "C:\\Windows\\sysnative\\cmd.exe"
 }
